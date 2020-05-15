@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "522451514146",
+    "firebase_url": "https://beez-1c391.firebaseio.com",
+    "project_id": "beez-1c391",
+    "storage_bucket": "beez-1c391.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:522451514146:android:088778938b7d0107f5ab7b",
+        "android_client_info": {
+          "package_name": "com.example.beez"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "522451514146-n6vie9nbvj4becdf1rsv2aok9k7fcrvu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBheHD3hLbOSZo30bv0KA3utNbJkz3I7uA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "522451514146-n6vie9nbvj4becdf1rsv2aok9k7fcrvu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
