@@ -58,7 +58,7 @@ public class MessageActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                startActivity(new Intent(MessageActivity.this,MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         });
 
@@ -103,7 +103,7 @@ public class MessageActivity extends AppCompatActivity {
                     profile_img.setImageResource(R.mipmap.ic_launcher_round);
 
                 } else {
-                    Glide.with(MessageActivity.this).load(user.getImageURL()).into(profile_img);
+                    Glide.with(getApplicationContext()).load(user.getImageURL()).into(profile_img);
 
                 }
                 readMessages(fuser.getUid(),userid,user.getImageURL());
@@ -155,5 +155,27 @@ public class MessageActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void status(String status) {
+        reference=FirebaseDatabase.getInstance().getReference("Users").child(fuser.getUid());
+
+        HashMap<String,Object> hashmap=new HashMap<>();
+        hashmap.put("status", status);
+
+        reference.updateChildren(hashmap);
+
+    }
+
+    protected  void onResume(){
+        super.onResume();
+        status("online");
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        status("offline");
     }
 }

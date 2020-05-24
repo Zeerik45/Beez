@@ -50,7 +50,7 @@ public class ProfileFragment extends Fragment {
     private DatabaseReference reference;
     private FirebaseUser fuser;
 
-    StorageReference storageReference;
+    private StorageReference storageReference;
     public static final int IMAGE_Request = 1;
     private Uri imageUri;
     private StorageTask uploadTask;
@@ -77,7 +77,9 @@ public class ProfileFragment extends Fragment {
                 if (user.getImageURL().equals("default")) {
                     image_profile.setImageResource(R.mipmap.ic_launcher);
                 } else {
-                    Glide.with(getContext()).load(user.getImageURL()).into(image_profile);
+                    if (isAdded()) {
+                        Glide.with(Objects.requireNonNull(getContext())).load(user.getImageURL()).into(image_profile);
+                    }
                 }
             }
 
@@ -169,11 +171,10 @@ public class ProfileFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == IMAGE_Request && resultCode == RESULT_OK && data != null && data.getData() != null) {
             imageUri = data.getData();
-            if(uploadTask!=null && uploadTask.isInProgress()){
+            if (uploadTask != null && uploadTask.isInProgress()) {
                 Toast.makeText(getContext(), "Upload in progress!!!", Toast.LENGTH_SHORT).show();
 
-            }
-            else {
+            } else {
                 uploadImage();
             }
         }
