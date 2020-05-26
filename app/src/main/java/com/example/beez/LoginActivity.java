@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,7 +23,9 @@ import java.util.Objects;
 public class LoginActivity extends AppCompatActivity {
     MaterialEditText email, password;
     Button button_login;
-    FirebaseAuth auth=FirebaseAuth.getInstance();;
+    TextView forgot_password;
+    FirebaseAuth auth = FirebaseAuth.getInstance();
+    ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,14 @@ public class LoginActivity extends AppCompatActivity {
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         button_login = findViewById(R.id.btn_login);
+        forgot_password = findViewById(R.id.forgot_password);
+
+        forgot_password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this,ResetPasswordActivity.class));
+            }
+        });
 
 
         button_login.setOnClickListener(new View.OnClickListener() {
@@ -46,20 +57,18 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (TextUtils.isEmpty(emaill) || TextUtils.isEmpty(pass)) {
                     Toast.makeText(LoginActivity.this, "Fill ALL THE REQUIRED FIELDS", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    auth.signInWithEmailAndPassword(emaill,pass)
+                } else {
+                    auth.signInWithEmailAndPassword(emaill, pass)
                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if(task.isSuccessful()){
-                                        Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+                                    if (task.isSuccessful()) {
+                                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                         startActivity(intent);
                                         Toast.makeText(LoginActivity.this, "Loging In!!", Toast.LENGTH_SHORT).show();
                                         finish();
-                                    }
-                                    else{
+                                    } else {
                                         Toast.makeText(LoginActivity.this, "LOGIN FAILED!!!", Toast.LENGTH_SHORT).show();
                                     }
                                 }
