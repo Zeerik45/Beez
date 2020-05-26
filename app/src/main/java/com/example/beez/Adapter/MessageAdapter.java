@@ -19,6 +19,8 @@ import com.example.beez.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> {
@@ -64,9 +66,23 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         if (imageurl.equals("default")) {
             holder.profile_image.setImageResource(R.mipmap.ic_launcher_round);
         } else {
-                Glide.with(mContext).load(imageurl).into(holder.profile_image);
+            Glide.with(mContext).load(imageurl).into(holder.profile_image);
         }
+
+        if (position == mChat.size() - 1) {
+            if(chat.isIsseen()){
+            holder.txt_seen.setText(""+"Seen!");
+            }else{
+                holder.txt_seen.setText(""+"Delivered!");
+            }
+
+        }
+        else{
+            holder.txt_seen.setVisibility(View.GONE);
+        }
+
     }
+
 
     @Override
     public int getItemCount() {
@@ -76,6 +92,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView show_message;
+        public TextView txt_seen;
         public ImageView profile_image;
 
 
@@ -83,6 +100,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             super(itemView);
 
             show_message = itemView.findViewById(R.id.show_message);
+            txt_seen = itemView.findViewById(R.id.txt_seen);
             profile_image = itemView.findViewById(R.id.profile_image);
 
         }
