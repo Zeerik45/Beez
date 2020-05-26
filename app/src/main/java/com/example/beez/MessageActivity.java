@@ -38,8 +38,10 @@ public class MessageActivity extends AppCompatActivity {
     CircleImageView profile_img;
     TextView username;
     FirebaseUser fuser;
+    String userid;
     ImageButton btn_send;
     EditText text_send;
+
 
     MessageAdapter messageAdapter;
     List<Chat> mchat;
@@ -146,6 +148,7 @@ public class MessageActivity extends AppCompatActivity {
 
     private void sendmessage(String sender, String receiver, String message) {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+        final String userid = intent.getStringExtra("userid");     // THIS, ADD IT
         HashMap<String, Object> hashmap = new HashMap<>();
         hashmap.put("sender", sender);
         hashmap.put("receiver", receiver);
@@ -153,8 +156,61 @@ public class MessageActivity extends AppCompatActivity {
         hashmap.put("isseen", false);
 
         reference.child("Chats").push().setValue(hashmap);
+//adding user to chat fragment
+        final DatabaseReference chatRef=FirebaseDatabase.getInstance().getReference("Chatlist")
+                .child(fuser.getUid())
+                .child(userid);
+
+        chatRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (!dataSnapshot.exists()){
+                    chatRef.child("id").setValue(userid);
+                }
+
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        final DatabaseReference chatRef1 = FirebaseDatabase.getInstance().getReference("Chatlist")
+
+                .child(receiver).child(fuser.getUid());
+
+        chatRef1.addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                if(!dataSnapshot.exists())
+
+                {
+
+                    chatRef1.child("id").setValue(fuser.getUid());
+
+                }
+
+            }
+
+
+
+            @Override
+
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+
+
+            }
+
+        });
+
 
     }
+
 
     private void readMessages(final String myid, final String userid, final String imageurl) {
         mchat = new ArrayList<>();
