@@ -52,6 +52,19 @@
             android:inputType="textPassword"
             app:met_floatingLabel="normal" />
 
+        <TextView
+            android:id="@+id/already_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="Already Have An Account?"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+
+            tools:ignore="HardcodedText" />
+
         <Button
             android:layout_width="192dp"
             android:layout_height="63dp"

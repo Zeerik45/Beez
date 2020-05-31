@@ -44,7 +44,8 @@
             android:layout_marginTop="10dp"
             android:hint="Password"
             android:inputType="textPassword"
-            app:met_floatingLabel="normal" />
+            app:met_floatingLabel="normal"
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/forgot_password"
@@ -57,7 +58,7 @@
             android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold"
 
-            />
+            tools:ignore="HardcodedText" />
 
         <Button
             android:id="@+id/btn_login"
@@ -69,7 +70,8 @@
             android:text="Login"
             android:textColor="#fff"
             android:textStyle="bold"
-            android:typeface="sans" />
+            android:typeface="sans"
+            tools:ignore="HardcodedText" />
 
 
     </LinearLayout>

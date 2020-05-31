@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,6 +29,7 @@ public class RegisterActivity extends AppCompatActivity {
     Button button_register;
     FirebaseAuth auth=FirebaseAuth.getInstance();
     DatabaseReference ref;
+    TextView already;
 
 
     @Override
@@ -41,7 +43,14 @@ public class RegisterActivity extends AppCompatActivity {
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
         email = findViewById(R.id.email);
+        already=findViewById(R.id.already_account);
         button_register = findViewById(R.id.btn_register);
+        already.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(RegisterActivity.this,LoginActivity.class));
+            }
+        });
 
         button_register.setOnClickListener(new View.OnClickListener() {
             @Override
