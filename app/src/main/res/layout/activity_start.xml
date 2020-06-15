@@ -8,16 +8,32 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="389dp"
-        android:layout_height="406dp"
+        android:layout_width="398dp"
+        android:layout_height="354dp"
+        android:background="#FFFFFF"
         android:contentDescription="TODO"
-        android:src="@drawable/bee"
+        android:src="@drawable/pngtree"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.461"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.012" />
+        app:layout_constraintVertical_bias="0.114" />
+
+    <TextView
+        android:layout_width="401dp"
+        android:layout_height="65dp"
+        android:fontFamily="@font/raleway_medium"
+        android:text="BEEZ"
+        android:textAlignment="center"
+        android:textColor="#171717"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_signup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.269" />
 
     <Button
         android:id="@+id/btn_login"
@@ -43,7 +59,7 @@
         android:layout_width="192dp"
         android:layout_height="63dp"
         android:layout_below="@+id/btn_login"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="488dp"
         android:background="@drawable/buttonradius"
         android:ellipsize="none"
         android:text="Signup"
@@ -51,7 +67,8 @@
         android:textStyle="bold"
         android:typeface="sans"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

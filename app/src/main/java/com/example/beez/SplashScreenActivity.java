@@ -18,7 +18,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                 .withTargetActivity(StartActivity.class)
                 .withSplashTimeOut(3000)
                 .withBackgroundColor(Color.parseColor("#FFFFFF"))
-                .withLogo(R.drawable.bee);
+                .withLogo(R.drawable.pngtree);
 
         View easyscreen=config.create();
         setContentView(easyscreen);

@@ -7,8 +7,9 @@
     tools:context=".Fragments.ProfileFragment">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="398dp"
+        android:layout_height="381dp">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -19,7 +20,7 @@
                 android:layout_height="wrap_content"
                 android:text="Profile"
                 android:textColor="@color/colorPrimaryDark"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profile_image"
@@ -27,21 +28,37 @@
                 android:layout_height="200dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="50dp"
-                android:src="@mipmap/ic_launcher"
-                />
+                android:src="@mipmap/ic_launcher" />
 
             <TextView
                 android:id="@+id/username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="username"
                 android:layout_below="@+id/profile_image"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
-                android:textStyle="bold"
-                android:textSize="25dp"
+                android:text="username"
                 android:textColor="@color/colorPrimaryDark"
-                />
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <Button
+                android:layout_width="192dp"
+                android:layout_height="63dp"
+                android:id="@+id/delete_account"
+                android:layout_below="@+id/username"
+                android:layout_marginStart="65dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/buttonradius"
+                android:text="Delete Account"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
+
+
         </RelativeLayout>
+
+
     </androidx.cardview.widget.CardView>
+
+
 </RelativeLayout>

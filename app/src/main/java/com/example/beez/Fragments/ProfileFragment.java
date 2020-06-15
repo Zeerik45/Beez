@@ -1,7 +1,9 @@
 package com.example.beez.Fragments;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,8 +20,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.example.beez.LoginActivity;
 import com.example.beez.Model.User;
 import com.example.beez.R;
+import com.example.beez.StartActivity;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -46,6 +51,7 @@ import static android.app.Activity.RESULT_OK;
 public class ProfileFragment extends Fragment {
     private CircleImageView image_profile;
     private TextView username;
+    private Button delete_account;
 
     private DatabaseReference reference;
     private FirebaseUser fuser;
@@ -62,6 +68,8 @@ public class ProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         image_profile = view.findViewById(R.id.profile_image);
         username = view.findViewById(R.id.username);
+        delete_account=view.findViewById(R.id.delete_account);
+
 
 
         storageReference = FirebaseStorage.getInstance().getReference("uploads");
@@ -93,6 +101,48 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 openImage();
+            }
+        });
+
+        delete_account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+                dialog.setTitle("Are you sure?");
+                dialog.setMessage("If you click delete account all of your user data will be removed.");
+                dialog.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        fuser = FirebaseAuth.getInstance().getCurrentUser();
+                        assert fuser != null;
+                        fuser.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(getContext(), "Account Deleted", Toast.LENGTH_SHORT).show();
+                                    Intent i = new Intent(getContext(), StartActivity.class);
+                                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    startActivity(i);
+
+                                } else {
+                                    Toast.makeText(getContext(), Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        });
+
+
+                    }
+                });
+                dialog.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                AlertDialog alertDialog = dialog.create();
+                alertDialog.show();
             }
         });
 
